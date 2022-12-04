@@ -6,6 +6,8 @@ import med.voll.VollMedApi.medico.DadosListagemMedico;
 import med.voll.VollMedApi.medico.Medico;
 import med.voll.VollMedApi.medico.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,10 +31,8 @@ public class MedicoController {
     }
 
     @GetMapping
-    public List<DadosListagemMedico> listar() {
-        return repository.findAll() //retorna uma lista de médicos
-                .stream() //cria um fluxo/pipeline de transformação que será executado pelo map
-                .map(DadosListagemMedico::new) //instancia um obj de listagem e envia o list de médicos para o seu construtor
-                .toList(); //converte para o tipo lista
+    public Page<DadosListagemMedico> listar(Pageable paginacao) {
+        return repository.findAll(paginacao) //retorna uma lista de médicos
+                .map(DadosListagemMedico::new); //instancia um obj de listagem e envia o list de médicos para o seu construtor
     }
 }
