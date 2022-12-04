@@ -1,10 +1,7 @@
 package med.voll.VollMedApi.controller;
 
 import jakarta.validation.Valid;
-import med.voll.VollMedApi.medico.DadosCadastroMedico;
-import med.voll.VollMedApi.medico.DadosListagemMedico;
-import med.voll.VollMedApi.medico.Medico;
-import med.voll.VollMedApi.medico.MedicoRepository;
+import med.voll.VollMedApi.medico.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,5 +34,16 @@ public class MedicoController {
             Pageable paginacao) {
         return repository.findAll(paginacao) //retorna uma lista de médicos
                 .map(DadosListagemMedico::new); //instancia um obj de listagem e envia o list de médicos para o seu construtor
+    }
+
+    @PutMapping
+    @Transactional
+    public void atualizar(
+            @RequestBody //recebe os dados do corpo da requisição
+            @Valid //executa as validações do bean validation
+            DadosAtualizacaoMedico dados) {
+        var medico = repository.getReferenceById(dados.id());
+        medico.atualizarInformacoes(dados);
+
     }
 }
