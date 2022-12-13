@@ -3,6 +3,7 @@ package med.voll.VollMedApi.controller;
 import jakarta.validation.Valid;
 import med.voll.VollMedApi.medico.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ public class MedicoController {
 
     @PostMapping
     @Transactional
+    @CacheEvict(value = "ListagemMedicos", allEntries = true)
     public void cadastrar(
             @RequestBody //recebe os dados do corpo da requisição
             @Valid //executa as validações do bean validation
@@ -39,6 +41,7 @@ public class MedicoController {
 
     @PutMapping
     @Transactional
+    @CacheEvict(value = "ListagemMedicos", allEntries = true)
     public void atualizar(
             @RequestBody //recebe os dados do corpo da requisição
             @Valid //executa as validações do bean validation
@@ -50,6 +53,7 @@ public class MedicoController {
 
     @DeleteMapping("/{id}")
     @Transactional
+    @CacheEvict(value = "ListagemMedicos", allEntries = true)
     public void excluir(@PathVariable Long id) {
         var medico = repository.getReferenceById(id);
         medico.excluir();
