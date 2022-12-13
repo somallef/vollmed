@@ -3,6 +3,8 @@ package med.voll.VollMedApi.controller;
 import jakarta.validation.Valid;
 import med.voll.VollMedApi.medico.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -27,6 +29,7 @@ public class MedicoController {
     }
 
     @GetMapping
+    @Cacheable(value = "ListagemMedicos")
     public Page<DadosListagemMedico> listar(
             @PageableDefault(size = 10, sort = { "crm" }) //altera as configurações padrão de paginação e ordenação do Spring
             Pageable paginacao) {
