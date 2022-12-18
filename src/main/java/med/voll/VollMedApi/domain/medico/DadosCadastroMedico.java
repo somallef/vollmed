@@ -1,11 +1,11 @@
-package med.voll.VollMedApi.medico;
+package med.voll.VollMedApi.domain.medico;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import med.voll.VollMedApi.endereco.DadosEndereco;
+import med.voll.VollMedApi.domain.endereco.DadosEndereco;
 
 public record DadosCadastroMedico(
         @NotBlank // notblank valida se não é uma e string vazia e se não é nulo (ou seja, se o campo não foi enviado)

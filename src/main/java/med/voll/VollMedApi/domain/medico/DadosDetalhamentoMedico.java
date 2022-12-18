@@ -1,5 +1,5 @@
-package med.voll.VollMedApi.medico;
-import med.voll.VollMedApi.endereco.Endereco;
+package med.voll.VollMedApi.domain.medico;
+import med.voll.VollMedApi.domain.endereco.Endereco;
 
 public record DadosDetalhamentoMedico(
 
