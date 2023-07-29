@@ -17,7 +17,3 @@ create table pacientes(
     primary key(id)
 
 );
-
-INSERT INTO vollmed_api.pacientes
-(nome, email, cpf, logradouro, bairro, cep, complemento, numero, uf, cidade, telefone, ativo)
-values('Paciente Ingles','paciente_ingles@email.com','78079343012','Rua 123','Jd Numeros','07299999','','999','SP','SAO PAULO','1133333333',1);
