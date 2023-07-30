@@ -1,6 +1,7 @@
 package med.voll.VollMedApi.infra.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
+import med.voll.VollMedApi.domain.ValidacaoException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,6 +14,11 @@ public class TratadorDeErros {
     @ExceptionHandler(EntityNotFoundException.class) // por meio desta anotação, o spring entende que quando uma exceção deste tipo for lançada, é este método que deve ser chamado
     public ResponseEntity tratarErro404() {
         return ResponseEntity.notFound().build();
+    }
+
+    @ExceptionHandler(ValidacaoException.class)
+    public ResponseEntity tratarErroRegraDeNegocio(ValidacaoException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class) // por meio desta anotação, o spring entende que quando uma exceção deste tipo for lançada, é este método que deve ser chamado
